@@ -15,7 +15,7 @@ namespace NZWalks.API.Controllers
             this.userManager = userManager;
         }
 
-        //POST api/Auth/register
+        //POST: api/Auth/register
         [HttpPost]
         [Route( "register" )]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto registerRequestDto)
@@ -42,6 +42,20 @@ namespace NZWalks.API.Controllers
             }
             return BadRequest( identityResult.Errors );
 
+        }
+    
+        // POST: api/Auth/login
+        [HttpPost]
+        [Route( "login" )]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequestDto)
+        {
+            var user = await userManager.FindByEmailAsync( loginRequestDto.Username );
+            if(user != null && await userManager.CheckPasswordAsync( user, loginRequestDto.Password ))
+            {
+                //TODO: generate token
+                return Ok( "User was logged in!" );
+            }
+            return BadRequest( "Username or password is incorrect!" );
         }
     }
 }
