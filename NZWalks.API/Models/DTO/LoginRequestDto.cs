@@ -1,11 +1,14 @@
 using System.ComponentModel.DataAnnotations;
 
-public class LoginRequestDto
+namespace NZWalks.API.Models.DTO
 {
-    [Required]
-    [DataType( DataType.EmailAddress )]
-    public string Username { get; set; }
-    [Required]
-    [DataType( DataType.Password )]
-    public string Password { get; set; }
+    public class LoginRequestDto
+    {
+        [Required]
+        [DataType( DataType.EmailAddress )]
+        public string Username { get; set; }
+        [Required]
+        [DataType( DataType.Password )]
+        public string Password { get; set; }
+    }
 }
